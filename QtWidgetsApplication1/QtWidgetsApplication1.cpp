@@ -8,71 +8,29 @@ QtWidgetsApplication1::QtWidgetsApplication1(QWidget* parent)
 {
 	ui.setupUi(this);
 	ui.lineEdit->setValidator(new QRegularExpressionValidator(QRegularExpression("[0-9+-/*]+")));
+
+	connect(ui.pushButton_0, &QPushButton::released, this, [this] { UpdateDisplay('0'); });
+	connect(ui.pushButton_1, &QPushButton::released, this, [this] { UpdateDisplay('1'); });
+	connect(ui.pushButton_2, &QPushButton::released, this, [this] { UpdateDisplay('2'); });
+	connect(ui.pushButton_3, &QPushButton::released, this, [this] { UpdateDisplay('3'); });
+	connect(ui.pushButton_4, &QPushButton::released, this, [this] { UpdateDisplay('4'); });
+	connect(ui.pushButton_5, &QPushButton::released, this, [this] { UpdateDisplay('5'); });
+	connect(ui.pushButton_6, &QPushButton::released, this, [this] { UpdateDisplay('6'); });
+	connect(ui.pushButton_7, &QPushButton::released, this, [this] { UpdateDisplay('7'); });
+	connect(ui.pushButton_8, &QPushButton::released, this, [this] { UpdateDisplay('8'); });
+	connect(ui.pushButton_9, &QPushButton::released, this, [this] { UpdateDisplay('9'); });
+	connect(ui.multiplication, &QPushButton::released, this, [this] { UpdateDisplay('*'); });
+	connect(ui.division, &QPushButton::released, this, [this] { UpdateDisplay('/'); });
+	connect(ui.power, &QPushButton::released, this, [this] { UpdateDisplay('^'); });
+	connect(ui.addition, &QPushButton::released, this, [this] { UpdateDisplay('+'); });
+	connect(ui.subtraction, &QPushButton::released, this, [this] { UpdateDisplay('-'); });
+	connect(ui.back, &QPushButton::released, this, [this] { Back(); });
+	connect(ui.equals, &QPushButton::released, this, [this] { ShowResult(); });
 }
 
 QtWidgetsApplication1::~QtWidgetsApplication1()
 {}
 
-void QtWidgetsApplication1::Add()
-{
-	UpdateDisplay('+');
-}
-void QtWidgetsApplication1::Subtrack()
-{
-	UpdateDisplay('-');
-}
-void QtWidgetsApplication1::Multiple()
-{
-	UpdateDisplay('*');
-}
-void QtWidgetsApplication1::Divide()
-{
-	UpdateDisplay('/');
-}
-void QtWidgetsApplication1::Power()
-{
-	UpdateDisplay('^');
-}
-void QtWidgetsApplication1::Zero()
-{
-	UpdateDisplay('0');
-}
-void QtWidgetsApplication1::One()
-{
-	UpdateDisplay('1');
-}
-void QtWidgetsApplication1::Two()
-{
-	UpdateDisplay('2');
-}
-void QtWidgetsApplication1::Three()
-{
-	UpdateDisplay('3');
-}
-void QtWidgetsApplication1::Four()
-{
-	UpdateDisplay('4');
-}
-void QtWidgetsApplication1::Five()
-{
-	UpdateDisplay('5');
-}
-void QtWidgetsApplication1::Six()
-{
-	UpdateDisplay('6');
-}
-void QtWidgetsApplication1::Seven()
-{
-	UpdateDisplay('7');
-}
-void QtWidgetsApplication1::Eight()
-{
-	UpdateDisplay('8');
-}
-void QtWidgetsApplication1::Nine()
-{
-	UpdateDisplay('9');
-}
 void QtWidgetsApplication1::Back()
 {
 	ui.lineEdit->setText(ui.lineEdit->displayText().removeLast());
