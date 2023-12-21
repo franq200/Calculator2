@@ -13,9 +13,8 @@ template<typename T>
 class Calculator
 {
 public:
-	Calculator()// : m_actionMaps({ {'+', &Calculator<T>::add}, {'-', &Calculator<T>::sub}, {'/', &Calculator<T>::divide}, {'*', &Calculator<T>::mul}, {'^', &Calculator<T>::pow} })
+	Calculator() : m_actionMaps({ {'+', &Calculator<T>::add}, {'-', &Calculator<T>::sub}, {'/', &Calculator<T>::divide}, {'*', &Calculator<T>::mul}, {'^', &Calculator<T>::pow} })
     {
-        m_actionMaps.emplace('/', &Calculator<T>::divide);
     }
     T Calculate(const std::string& expression)
 	{
@@ -53,7 +52,7 @@ private:
 	T SaveAndReturnResult(T result, const std::string& expression)
 	{
 		m_history.push_back(expression + "=" + std::to_string(result));
-		return result;;
+		return result;
 	}
 	void ValidateExpression(const std::string& expression) const
 	{
@@ -72,22 +71,22 @@ private:
 		return std::stoi(expression.substr(0, operatorPos));
 	}
 
-	T add(T lhs, T rhs)
+	static T add(T lhs, T rhs)
 	{
 		return lhs + rhs;
 	}
 
-	T sub(T lhs, T rhs)
+	static T sub(T lhs, T rhs)
 	{
 		return lhs - rhs;
 	}
 
-	T mul(T lhs, T rhs)
+	static T mul(T lhs, T rhs)
 	{
 		return lhs * rhs;
 	}
 
-	T divide(T lhs, T rhs)
+	static T divide(T lhs, T rhs)
 	{
 		if (rhs == 0)
 		{
@@ -97,12 +96,12 @@ private:
 		return lhs / rhs;
 	}
 
-	T pow(T lhs, T rhs)
+	static T pow(T lhs, T rhs)
 	{
 		return static_cast<T>(std::pow(lhs, rhs));
 	}
 
     std::vector<std::string> m_history;
     std::string m_operators = "+-/*^";
-    std::map<Operator, std::function<::std::type_identity_t<T>(::std::type_identity_t<T>,::std::type_identity_t<T>)>> m_actionMaps;
+    std::map<Operator, std::function<T(T,T)>> m_actionMaps;
 };
