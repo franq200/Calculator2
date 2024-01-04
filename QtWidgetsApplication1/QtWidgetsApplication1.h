@@ -18,5 +18,5 @@ private:
     void ShowResult();
 
     Ui::QtWidgetsApplication1Class ui;
-    Calculator<int> m_calculator;
+    Calculator m_calculator;
 };
