@@ -16,5 +16,17 @@ std::string Calculator::Calculate(const std::string& expression)
 		return std::to_string(calc.Calculate(expression, m_history));
 	}
 	TCalculator<double> calc;
-	return std::to_string(calc.Calculate(expression, m_history));
+	std::string result = std::to_string(calc.Calculate(expression, m_history));
+	RemoveTrailingZeros(result);
+	return result;
+}
+
+void Calculator::RemoveTrailingZeros(std::string& result)
+{
+	size_t lastNotZero = result.find_last_not_of('0');
+	size_t pointPos = result.find_first_of('.');
+	if (pointPos != std::string::npos && pointPos < lastNotZero)
+	{
+		result.erase(lastNotZero + 1, result.size() - lastNotZero - 1);
+	}
 }

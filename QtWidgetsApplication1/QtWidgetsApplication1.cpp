@@ -40,8 +40,8 @@ void QtWidgetsApplication1::ShowResult()
 {
 	try
 	{
-		int result = m_calculator.Calculate(ui.lineEdit->displayText().toStdString());
-		ui.myDisplay->display(result);
+		std::string result = m_calculator.Calculate(ui.lineEdit->displayText().toStdString());
+		ui.myDisplay->display(result.c_str());
 		auto history = m_calculator.GetLastAction();
 		ui.history->addItem(history.c_str());
 	}

@@ -112,3 +112,8 @@ TEST(GetLastActionTest, SimpleTestWithoutAction) {
 	calculator.Calculate("");
 	EXPECT_EQ(calculator.GetLastAction(), "");
 }
+
+TEST(GetLastActionTest, SimpleTestX) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("399,2-2"), "397.2");
+}

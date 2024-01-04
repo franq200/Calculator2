@@ -21,24 +21,26 @@ public:
 		{
 			return 0;
 		}
-		size_t operatorPos = expression.find_first_of(m_operators);
+		std::string convertedExpression = expression;
+		std::replace_if(convertedExpression.begin(), convertedExpression.end(), [](char el) {return el == ','; }, '.');
+		size_t operatorPos = convertedExpression.find_first_of(m_operators);
 		bool isFirstNumNegative = operatorPos == 0;
-		ValidateExpression(expression);
+		ValidateExpression(convertedExpression);
 
-		int firstNumber = ParseFirstNumber(expression, operatorPos);
-		if (operatorPos == std::string::npos || operatorPos == expression.size() - 1)
+		T firstNumber = ParseFirstNumber(convertedExpression, operatorPos);
+		if (operatorPos == std::string::npos || operatorPos == convertedExpression.size() - 1)
 		{
 			return SaveAndReturnResult(firstNumber, expression, history);
 		}
 
-		auto mapActionIt = m_actionMaps.find(expression[operatorPos]);
+		auto mapActionIt = m_actionMaps.find(convertedExpression[operatorPos]);
 		if (mapActionIt == m_actionMaps.end())
 		{
 			return SaveAndReturnResult(firstNumber, expression, history);
 		}
 
-		int secondNumber = std::stoi(expression.substr(operatorPos + 1, expression.size() - (operatorPos + 1)));
-		std::function<T(T, T)> action = mapActionIt->second;
+		T secondNumber = std::stoi(convertedExpression.substr(operatorPos + 1, convertedExpression.size() - (operatorPos + 1)));
+		std::function<T(T, T)> action = mapActionIt->second;	
 		return SaveAndReturnResult(action(firstNumber, secondNumber), expression, history);
 	}
 private:
@@ -59,9 +61,9 @@ private:
 		operatorPos = expression.find_first_of(m_operators, 1);
 		if (operatorPos == std::string::npos)
 		{
-			return std::stoi(expression.substr(0, expression.size()));
+			return static_cast<T>(std::stod(expression.substr(0, expression.size())));
 		}
-		return std::stoi(expression.substr(0, operatorPos));
+		return static_cast<T>(std::stod(expression.substr(0, operatorPos)));
 	}
 
 	static T add(T lhs, T rhs)
