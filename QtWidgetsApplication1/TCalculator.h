@@ -39,7 +39,7 @@ public:
 			return SaveAndReturnResult(firstNumber, expression, history);
 		}
 
-		T secondNumber = std::stoi(convertedExpression.substr(operatorPos + 1, convertedExpression.size() - (operatorPos + 1)));
+		T secondNumber = std::stod(convertedExpression.substr(operatorPos + 1, convertedExpression.size() - (operatorPos + 1)));
 		std::function<T(T, T)> action = mapActionIt->second;	
 		return SaveAndReturnResult(action(firstNumber, secondNumber), expression, history);
 	}

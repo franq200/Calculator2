@@ -113,7 +113,32 @@ TEST(GetLastActionTest, SimpleTestWithoutAction) {
 	EXPECT_EQ(calculator.GetLastAction(), "");
 }
 
-TEST(GetLastActionTest, SimpleTestX) {
+TEST(GetLastActionTest, SimpleTestWithFloatMinusNaturalNumber) {
 	Calculator calculator;
 	EXPECT_EQ(calculator.Calculate("399,2-2"), "397.2");
+}
+
+TEST(GetLastActionTest, SimpleTestWithFloatMinusFloat) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("500,0 - 20,2"), "479.8");
+}
+
+TEST(GetLastActionTest, SimpleTestWithNaturalNumberMinusFloat) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("121 - 10,5"), "110.5");
+}
+
+TEST(GetLastActionTest, SimpleTestWithNuberWithTwoNumberAfterPointAndOne) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("399,55 - 398,5"), "1.05");
+}
+
+TEST(GetLastActionTest, SimpleTestWithFloatMultipliedByFloat) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("2,5*1,5"), "3.75");
+}
+
+TEST(GetLastActionTest, SimpleTestNumToFloatPower) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("4^0,5"), "2");
 }
