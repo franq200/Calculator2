@@ -25,7 +25,7 @@ void Calculator::RemoveTrailingZeros(std::string& result)
 {
 	size_t lastNotZero = result.find_last_not_of('0');
 	size_t pointPos = result.find_first_of('.');
-	if (pointPos != std::string::npos && pointPos <= lastNotZero)
+	if (pointPos != std::string::npos)
 	{
 		if (pointPos < lastNotZero)
 		{

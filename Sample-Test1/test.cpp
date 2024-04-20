@@ -142,3 +142,9 @@ TEST(GetLastActionTest, SimpleTestNumToFloatPower) {
 	Calculator calculator;
 	EXPECT_EQ(calculator.Calculate("4^0,5"), "2");
 }
+
+
+TEST(GetLastActionTest, SimpleTestX) {
+	Calculator calculator;
+	EXPECT_EQ(calculator.Calculate("323123213123154342131211122,00001+0,00001"), "2");
+}
